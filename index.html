@@ -26,7 +26,6 @@
 
         body {
             color: #333;
-            margin-bottom: 25vh;
             max-width: 800px;
             min-width: 660px;
         }
@@ -34,7 +33,7 @@
         textarea {
             display: block;
             width: 90%;
-            min-height: 400px;
+            min-height: 200px;
             margin: 0 auto;
             box-shadow: 1px 1px 5px 1px #aaa;
         }
@@ -78,6 +77,14 @@
             margin: 2rem;
             text-align: center;
         }
+        .size {
+            text-align: center;
+            padding: .25rem 0;
+        }
+        .size button {
+            width: 120px;
+            margin: .25rem .5rem;
+        }
         .repo a {
             text-decoration: none;
         }
@@ -97,6 +104,10 @@
                 <div>行取り</div>
                 <input type="number" min="1" v-model="linesPerPage">
             </div>
+        </div>
+        <div class="size">
+            <button @click="setShiroku">四六判キホン</button>
+            <button @click="setA5">A5判キホン</button>
         </div>
         <table>
             <thead>
@@ -236,6 +247,16 @@
             },
             components: {
                 "page-count": pageCount
+            },
+            methods: {
+                setShiroku: function() {
+                    this.charsPerLine = 30;
+                    this.linesPerPage = 27;
+                },
+                setA5: function() {
+                    this.charsPerLine = 35;
+                    this.linesPerPage = 30;
+                },
             }
         }).mount("#app");
     </script>
