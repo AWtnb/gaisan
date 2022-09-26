@@ -180,6 +180,9 @@
         }
 
         const countLines = (lines, charsPerLine) => {
+            if (charsPerLine < 1) {
+                return 0;
+            }
             return lines.reduce((accum, cur) => {
                 const nBox = Math.ceil(cur.bytes() / 2);
                 const lines = Math.ceil(nBox / charsPerLine);
@@ -215,8 +218,8 @@
                     }
                 },
                 totalPages: function () {
-                    const gross = Math.ceil(this.totalLines.gross / this.linesPerPage);
-                    const net = Math.ceil(this.totalLines.net / this.linesPerPage);
+                    const gross = (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines.gross / this.linesPerPage);
+                    const net = (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines.net / this.linesPerPage);
                     return {
                         gross: {
                             small: gross,
