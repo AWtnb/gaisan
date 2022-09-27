@@ -88,6 +88,13 @@
         .repo a {
             text-decoration: none;
         }
+        .selected {
+            text-decoration: underline;
+            text-decoration-thickness: 0.4em;
+            text-decoration-color: rgba(255, 230, 0, 0.5);
+            text-underline-offset: -0.2em;
+            text-decoration-skip-ink: none;
+        }
 
 </style>
 </head>
@@ -106,8 +113,8 @@
             </div>
         </div>
         <div class="size">
-            <button @click="setShiroku">四六判キホン</button>
-            <button @click="setA5">A5判キホン</button>
+            <button @click="setShiroku" :class="{selected: isShiroku}">四六判キホン</button>
+            <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
         </div>
         <table>
             <thead>
@@ -243,6 +250,12 @@
                             large: Math.ceil(net * 1.2),
                         },
                     }
+                },
+                isShiroku: function() {
+                    return this.charsPerLine == 30 && this.linesPerPage == 27;
+                },
+                isA5: function() {
+                    return this.charsPerLine == 35 && this.linesPerPage == 30;
                 },
             },
             components: {
