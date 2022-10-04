@@ -31,68 +31,42 @@
         body {
             color: #333;
             max-width: 800px;
-            min-width: 660px;
+            min-width: 720px;
+        }
+
+        #app {
+            height: 90vh;
         }
 
         textarea {
             display: block;
+            font-size: .9rem;
             width: 90%;
             min-height: 200px;
             margin: 0 auto;
             box-shadow: 1px 1px 5px 1px #aaa;
         }
+        textarea::selection {
+            background-color: #acc1e7;
+        }
+
         input {
             box-shadow: 1px 1px 5px 1px #aaa;
-            width: 100px;
         }
 
-        table {
-            width: 90%;
-            margin: 0 auto;
-        }
-        table thead {
-            background-color: var(--bg-light);
-        }
-        table thead tr {
-            border-bottom: 1px solid var(--border);
-        }
-        table tbody tr {
-            background-color: var(--bg-light);
-            border-bottom: 1px solid var(--border);
-        }
-        td:nth-child(2), td:nth-child(2) *,
-        th:nth-child(2) {
-            color: #aaa;
-        }
-
-        .ui {
+        .meta {
             display: flex;
             width: 90%;
             margin: 0 auto;
             justify-content: space-between;
         }
-        .ui .box {
-            margin: 1rem auto;
+        .meta button {
+            height: 30px;
+            margin-top: 4px;
+            margin-right: 4px;
         }
-        .paren {
-            font-size: .9em;
-        }
-        .repo {
-            margin: 2rem;
-            text-align: center;
-        }
-        .size {
-            text-align: center;
-            padding: .25rem 0;
-        }
-        .size button {
-            width: 120px;
-            margin: .25rem .5rem;
-        }
-        .repo a {
-            text-decoration: none;
-        }
-        .selected {
+
+        button.selected {
             text-decoration: underline;
             text-decoration-thickness: 0.4em;
             text-decoration-color: rgba(255, 230, 0, 0.5);
@@ -100,12 +74,59 @@
             text-decoration-skip-ink: none;
         }
 
+        .ui {
+            display: flex;
+            width: 90%;
+            margin: 10px auto;
+        }
+        .ui .box, .ui button {
+            width: 25%;
+        }
+        .ui .box input:not([type="file"]) {
+            min-width: 100%;
+        }
+
+        .repo {
+            text-align: center;
+        }
+        .repo a {
+            text-decoration: none;
+        }
+
+        .gaisan {
+            background: tomato;
+            height: 160px;
+            width: 160px;
+            margin: 1em auto;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 3em;
+        }
+        .gaisan * {
+            display: inline-block;
+            margin-top: 22%;
+        }
+        .gaisan .page {
+            font-size: .4em;
+        }
+
 </style>
 </head>
 
 <body>
     <div id="app">
-        <textarea placeholder="paste here!" v-model="content"></textarea>
+        <textarea placeholder="paste here!" v-model="content" v-focus></textarea>
+        <div class="meta">
+            <div class="buttons">
+                <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
+                <button @click="setShiroku" :class="{selected: isShiroku}">四六判キホン</button>
+            </div>
+            <div class="counter">
+                {{totalChars}}
+                文字
+            </div>
+        </div>
         <div class="ui">
             <div class="box">
                 <div>字詰め</div>
@@ -115,49 +136,19 @@
                 <div>行取り</div>
                 <input type="number" min="1" v-model="linesPerPage">
             </div>
+            <div class="box">
+                <div>図表数</div>
+                <input type="number" min="0" v-model="figureTableCount">
+            </div>
+            <div class="box">
+                <div>図表の平均的な行取り</div>
+                <input type="number" min="1" v-model="figureLines">
+            </div>
         </div>
-        <div class="size">
-            <button @click="setShiroku" :class="{selected: isShiroku}">四六判キホン</button>
-            <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
+        <div class="gaisan">
+            <span class="num">{{totalPages}}</span>
+            <span class="page">ページ</span>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>概算</th>
-                    <th>空白除外</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        {{totalChars.gross}}
-                        文字
-                    </td>
-                    <td>
-                        {{totalChars.net}}
-                        文字
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {{totalLines.gross}}
-                        行相当
-                    </td>
-                    <td>
-                        {{totalLines.net}}
-                        行相当
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <page-count :page="totalPages.gross"></page-count>
-                    </td>
-                    <td>
-                        <page-count :page="totalPages.net"></page-count>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
     <div class="repo"><a href="https://github.com/AWtnb/gaisan" target="_blank">github</a></div>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.2.37/dist/vue.global.js"></script>
@@ -177,26 +168,6 @@
             return sum;
         };
 
-        const pageCount = {
-            props: {
-                page: {
-                    type: Object,
-                    require: true
-                }
-            },
-            template: `
-            {{page.small}}
-            ページ
-            <span class="paren">
-            &#65288;
-            <span>&times;1.1 = {{page.middle}}</span>
-            ,
-            <span>&times;1.2 = {{page.large}}</span>
-            &#65289;
-            </span>
-            `
-        };
-
         const countChars = (lines) => {
             return lines.reduce((accum, cur) => accum + cur.length, 0);
         }
@@ -206,8 +177,8 @@
                 return 0;
             }
             return lines.reduce((accum, cur) => {
-                const nBox = Math.ceil(cur.bytes() / 2);
-                const lines = Math.ceil(nBox / charsPerLine);
+                const nGrid = Math.ceil(cur.bytes() / 2);
+                const lines = Math.ceil(nGrid / charsPerLine);
                 return accum + lines;
             }, 0);
         }
@@ -215,45 +186,37 @@
         const vm = Vue.createApp({
             data: function () {
                 return {
-                    content: "",
+                    content: [
+                        "城のある町にて　梶井基次郎",
+                        "「高いとこの眺めは、アアッ（と咳をして）また格段でごわすな」",
+                        "　片手に洋傘、片手に扇子と日本手拭を持っている。頭が奇麗に禿げていて、カンカン帽子を冠っているのが、まるで栓をはめたように見える。――そんな老人が朗らかにそう言い捨てたまま峻の脇を歩いて行った。言っておいてこちらを振り向くでもなく、眼はやはり遠い眺望へ向けたままで、さもやれやれといったふうに石垣のはなのベンチへ腰をかけた。――",
+                        "　町を外れてまだ二里ほどの間は平坦な緑。Ｉ湾の濃い藍が、それのかなたに拡がっている。裾のぼやけた、そして全体もあまりかっきりしない入道雲が水平線の上に静かに蟠っている。――",
+                    ].join("\n"),
                     charsPerLine: 35,
                     linesPerPage: 30,
+                    figureTableCount: 5,
+                    figureLines: 10,
                 }
             },
             computed: {
                 contentLines: function () {
-                    return this.content.split(/\n/).filter(line => String(line).trim().length > 0);
+                    return this.content.split(/\n/);
                 },
-                pureLines: function () {
-                    return this.contentLines.map(line => line.trim().replace(/\s+/g, ""));
+                emptyReduced: function () {
+                    return this.contentLines.reduce((accum, line) => {
+                        accum.push(line);
+                        if (accum.length > 1 && accum.at(-1).trim().length < 1 && accum.at(-2).trim().length < 1) {
+                            accum.pop();
+                        }
+                        return accum;
+                    }, []);
                 },
                 totalChars: function () {
-                    return {
-                        gross: countChars(this.contentLines),
-                        net: countChars(this.pureLines)
-                    }
-                },
-                totalLines: function () {
-                    return {
-                        gross: countLines(this.contentLines, this.charsPerLine),
-                        net: countLines(this.pureLines, this.charsPerLine)
-                    }
+                    return countChars(this.emptyReduced);
                 },
                 totalPages: function () {
-                    const gross = (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines.gross / this.linesPerPage);
-                    const net = (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines.net / this.linesPerPage);
-                    return {
-                        gross: {
-                            small: gross,
-                            middle: Math.ceil(gross * 1.1),
-                            large: Math.ceil(gross * 1.2),
-                        },
-                        net: {
-                            small: net,
-                            middle: Math.ceil(net * 1.1),
-                            large: Math.ceil(net * 1.2),
-                        },
-                    }
+                    const totalLines = countLines(this.emptyReduced, this.charsPerLine) + this.figureTableCount * this.figureLines;
+                    return (this.linesPerPage < 1)? 0 : Math.ceil(totalLines / this.linesPerPage);
                 },
                 isShiroku: function() {
                     return this.charsPerLine == 30 && this.linesPerPage == 27;
@@ -261,9 +224,6 @@
                 isA5: function() {
                     return this.charsPerLine == 35 && this.linesPerPage == 30;
                 },
-            },
-            components: {
-                "page-count": pageCount
             },
             methods: {
                 setShiroku: function() {
@@ -274,6 +234,13 @@
                     this.charsPerLine = 35;
                     this.linesPerPage = 30;
                 },
+            },
+            directives: {
+                focus: {
+                    mounted: function (el) {
+                        el.select()
+                    }
+                }
             }
         }).mount("#app");
     </script>
