@@ -25,7 +25,9 @@
             </div>
             <div class="counter">
                 {{totalChars}}
-                文字
+                文字（
+                {{totalGrids}}
+                マス相当）
             </div>
         </div>
         <div class="ui">
@@ -56,22 +58,17 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3.2.37/dist/vue.global.js"></script>
     <script>
 
-        // https://zukucode.com/2017/04/javascript-string-length.html
-        String.prototype.bytes = function () {
-            let sum = 0;
-            for (let i = 0; i < this.length; i++) {
-                const c = this.charCodeAt(i);
-                if ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) {
-                    sum += 1;
-                } else {
-                    sum += 2;
-                }
-            }
-            return sum;
-        };
+        const countBytes = (s) => {
+            return [...Array(s.length).keys()].reduce((accum, i) => {
+                const c = s.charCodeAt(i);
+                // https://zukucode.com/2017/04/javascript-string-length.html
+                const nByte = ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4))? 1 : 2;
+                return accum + nByte;
+            }, 0)
+        }
 
-        const countChars = (lines) => {
-            return lines.reduce((accum, cur) => accum + cur.length, 0);
+        const countGrid = (s) => {
+            return Math.ceil(countBytes(s) / 2);
         }
 
         const countLines = (lines, charsPerLine) => {
@@ -82,8 +79,7 @@
                 if (line.trim().length < 1) {
                     return accum + 1;
                 }
-                const nGrid = Math.ceil(line.bytes() / 2);
-                return accum + Math.ceil(nGrid / charsPerLine);
+                return accum + Math.ceil(countGrid(line) / charsPerLine);
             }, 0);
         }
 
@@ -116,7 +112,10 @@
                     }, []);
                 },
                 totalChars: function () {
-                    return countChars(this.emptyReduced);
+                    return this.emptyReduced.reduce((accum, line) => accum + line.length, 0);
+                },
+                totalGrids: function () {
+                    return this.emptyReduced.reduce((accum, line) => accum + countGrid(line), 0);
                 },
                 totalLines: function () {
                     return countLines(this.emptyReduced, this.charsPerLine) + this.figureTableCount * this.figureLines;
