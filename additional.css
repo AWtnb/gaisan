@@ -16,7 +16,6 @@ html {
 body {
     color: #333;
     max-width: 800px;
-    min-width: 44rem;
 }
 
 #app {
@@ -58,22 +57,11 @@ button.selected {
     text-decoration-skip-ink: none;
 }
 
-.ui {
+.horizon {
     display: flex;
-    margin: 10px auto;
 }
-.ui .box, .ui button {
-    max-width: 25%;
-}
-.ui .box input:not([type="file"]) {
-    min-width: 0;
-}
-
-.repo {
-    text-align: center;
-}
-.repo a {
-    text-decoration: none;
+.ui {
+    width: 50%;
 }
 
 .gaisan {
@@ -81,7 +69,7 @@ button.selected {
     height: 160px;
     width: 160px;
     border-radius: 50%;
-    margin: 1em auto;
+    margin: auto;
     font-weight: bold;
     font-size: 5rem;
     color: tomato;
@@ -100,4 +88,11 @@ button.selected {
 }
 .gaisan .suffix {
     margin-bottom: 1em;
+}
+
+.repo {
+    text-align: center;
+}
+.repo a {
+    text-decoration: none;
 }
