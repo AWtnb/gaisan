@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+    --border: #004d61;
+    --bg: #e5e2df;
+    --bg-light: #f5f5f5;
+}
+
+html {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--bg);
+}
+
+body {
+    color: #333;
+    max-width: 800px;
+    min-width: 44rem;
+}
+
+#app {
+    height: 90vh;
+}
+
+textarea {
+    width: 100%;
+    display: block;
+    font-size: .9rem;
+    min-height: 200px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px 1px #aaa;
+}
+textarea::selection {
+    background-color: #acc1e7;
+}
+
+input {
+    box-shadow: 1px 1px 5px 1px #aaa;
+}
+
+.meta {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+.meta button {
+    height: 30px;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
+button.selected {
+    text-decoration: underline;
+    text-decoration-thickness: 0.4em;
+    text-decoration-color: rgba(255, 230, 0, 0.5);
+    text-underline-offset: -0.2em;
+    text-decoration-skip-ink: none;
+}
+
+.ui {
+    display: flex;
+    margin: 10px auto;
+}
+.ui .box, .ui button {
+    max-width: 25%;
+}
+.ui .box input:not([type="file"]) {
+    min-width: 0;
+}
+
+.repo {
+    text-align: center;
+}
+.repo a {
+    text-decoration: none;
+}
+
+.gaisan {
+    background: var(--primary);
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    margin: 1em auto;
+    font-weight: bold;
+    font-size: 5rem;
+    color: tomato;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.gaisan .prefix, .gaisan .suffix {
+    font-size: 1.5rem;
+    color: #fff;
+}
+.gaisan .prefix {
+    margin-top: .5em;
+}
+.gaisan .suffix {
+    margin-bottom: 1em;
+}
