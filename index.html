@@ -33,20 +33,20 @@
         <div class="horizon">
             <div class="ui">
                 <div class="box">
-                    <div>字詰め</div>
+                    <label>字詰め</label>
                     <input type="number" min="1" v-model="charsPerLine">
                 </div>
                 <div class="box">
-                    <div>行取り</div>
+                    <label>行取り</label>
                     <input type="number" min="1" v-model="linesPerPage">
                 </div>
                 <div class="box">
-                    <div>図表数</div>
+                    <label>図表数</label>
                     <input type="number" min="0" v-model="figureTableCount">
                 </div>
                 <div class="box">
-                    <div>図表サイズ感（行換算）</div>
-                    <input type="number" min="1" v-model="figureLines">
+                    <label>図表サイズ感：紙面上で約{{figureLines}}行</label>
+                    <input type="range" min="3" v-bind:max="linesPerPage" step="1" v-model="figureLines"/>
                 </div>
             </div>
             <div class="gaisan">
