@@ -34,8 +34,11 @@ textarea::selection {
     background-color: #acc1e7;
 }
 
-input {
+input[type="number"] {
     box-shadow: 1px 1px 5px 1px #aaa;
+}
+label {
+    display: block;
 }
 
 .meta {
