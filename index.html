@@ -17,7 +17,7 @@
 
 <body>
     <div id="app">
-        <textarea placeholder="paste here!" v-model="content" v-focus></textarea>
+        <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="meta">
             <div class="buttons">
                 <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
@@ -143,7 +143,7 @@
                 },
             },
             directives: {
-                focus: {
+                select: {
                     mounted: function (el) {
                         el.select()
                     }
