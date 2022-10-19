@@ -71,6 +71,11 @@ button.selected {
     padding-top: .75rem;
 }
 
+.lines {
+    font-weight: bold;
+    color: var(--primary);
+}
+
 .gaisan {
     background: var(--primary);
     height: 160px;

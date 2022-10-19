@@ -45,7 +45,7 @@
                     <input type="number" min="0" v-model="figureTableCount">
                 </div>
                 <div class="box">
-                    <label>図表サイズ感：紙面上で約{{figureLines}}行</label>
+                    <label>図表サイズ感：紙面上で約<span class="lines">{{figureLines}}</span>行</label>
                     <input type="range" min="3" v-bind:max="linesPerPage" step="1" v-model="figureLines"/>
                 </div>
             </div>
