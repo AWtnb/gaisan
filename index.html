@@ -70,7 +70,7 @@
         }
 
         const countGrid = (s) => {
-            return Math.ceil(countBytes(s) / 2);
+            return Math.ceil(countBytes(s.trim()) / 2) + 1;
         }
 
         const countLines = (lines, charsPerLine) => {
