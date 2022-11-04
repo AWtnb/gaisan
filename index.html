@@ -23,7 +23,7 @@
                 <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
                 <button @click="setShiroku" :class="{selected: isShiroku}">四六判キホン</button>
             </div>
-            <div class="counter">
+            <div class="counter" v-cloak>
                 {{totalChars}}
                 文字（
                 {{totalGrids}}
@@ -44,12 +44,12 @@
                     <label>図表数</label>
                     <input type="number" min="0" v-model="figureTableCount">
                 </div>
-                <div class="box">
+                <div class="box" v-cloak>
                     <label>図表サイズ感：紙面上で約<span class="lines">{{figureLines}}</span>行</label>
                     <input type="range" min="3" v-bind:max="linesPerPage" step="1" v-model="figureLines"/>
                 </div>
             </div>
-            <div class="gaisan">
+            <div class="gaisan" v-cloak>
                 <div class="prefix">約</div>
                 {{totalPages}}
                 <div class="suffix">ページ</div>
