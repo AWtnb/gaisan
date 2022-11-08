@@ -57,7 +57,8 @@
             </div>
             <div class="count" v-cloak>
                 <p>
-                    ×約
+                    <span class="multify">&times;</span>
+                    約
                     <span class="num">{{totalPages}}</span>
                     ページ
                 </p>
@@ -149,8 +150,8 @@
                 },
                 demoBox: function() {
                     return {
-                        width: this.charsPerLine * 4,
-                        height: this.linesPerPage * 4 * 1.6
+                        width: this.charsPerLine * 5,
+                        height: this.linesPerPage * 5 * 1.6
                     };
                 },
             },

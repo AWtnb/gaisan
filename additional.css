@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@400;700;900&display=swap');
 
 :root {
     --border: #004d61;
@@ -7,7 +7,7 @@
 }
 
 html {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Murecho', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     background-color: var(--bg);
@@ -75,7 +75,7 @@ input:not([type="file"]) {
 }
 
 .lines {
-    font-weight: bold;
+    font-weight: 700;
     color: var(--primary);
 }
 
@@ -88,18 +88,18 @@ input:not([type="file"]) {
 
 .preview {
     display: flex;
+    align-items: center;
+    font-weight: 700;
 }
 
 .demo-box {
     background-color: #ececec;
-    box-shadow: 2px 2px 4px gray;
+    box-shadow: 2px 2px 8px gray;
     position: relative;
-    margin: auto;
 }
 .demo-box p {
     margin: 0;
-    font-weight: bold;
-    font-size: .8em;
+    color: #3e3e3e;
 }
 .demo-box > p {
     position: absolute;
@@ -109,18 +109,24 @@ input:not([type="file"]) {
 .demo-box .demo-media {
     background-color: #a0d3d6;
 }
+.demo-box .demo-media p {
+    padding-left: .25em;
+}
 
 .count {
-    border: 1px solid forestgreen;
-    width: 30%;
     display: flex;
+    align-items: center;
+    font-weight: 700;
 }
-.count > p {
-    margin:0;
+.count p {
+    font-size: 1.8em;
 }
-.count > p .num {
-    font-size: 1.5em;
-    font-weight: bold;
+.count p .multify {
+    color: gray;
+}
+.count .num {
+    font-size: 2.5em;
+    font-weight: 900;
     color: tomato;
 }
 
