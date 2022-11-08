@@ -18,10 +18,6 @@ body {
     max-width: 800px;
 }
 
-#app {
-    height: 90vh;
-}
-
 textarea {
     width: 100%;
     display: block;
@@ -33,39 +29,46 @@ textarea {
 textarea::selection {
     background-color: #acc1e7;
 }
-
-input[type="number"] {
-    box-shadow: 1px 1px 5px 1px #aaa;
-}
 label {
     display: block;
 }
 
-.meta {
-    display: flex;
-    margin: 0 auto;
-    justify-content: space-between;
+input[type="number"] {
+    box-shadow: 1px 1px 5px 1px #aaa;
 }
-.meta button {
-    height: 30px;
-    margin-top: 4px;
-    margin-right: 4px;
+input[type="range"] {
+    width: 100%;
+}
+input:not([type="file"]) {
+    min-width: 0;
 }
 
-button.selected {
+.grid-counter {
+    text-align: right;
+}
+
+.horizon {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ui {
+    width: 40%;
+    min-width: 200px;
+}
+.ui .buttons {
+    justify-content: space-between;
+    display: flex;
+}
+.ui .buttons button {
+    width: 45%;
+}
+.ui .buttons button.selected {
     text-decoration: underline;
     text-decoration-thickness: 0.4em;
     text-decoration-color: rgba(255, 99, 71, 0.8);
     text-underline-offset: -0.2em;
     text-decoration-skip-ink: none;
-}
-
-.horizon {
-    display: flex;
-}
-
-.ui {
-    width: 50%;
 }
 .ui .box {
     padding-top: .75rem;
@@ -76,38 +79,51 @@ button.selected {
     color: var(--primary);
 }
 
-.gaisan {
-    background: var(--primary);
-    height: 160px;
-    width: 160px;
-    border-radius: 50%;
-    margin: auto;
-    font-weight: bold;
-    font-size: 5rem;
-    color: tomato;
-    text-align: center;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.gaisan .prefix, .gaisan .suffix {
-    font-size: 1.5rem;
-    color: #fff;
-}
-.gaisan .prefix {
-    margin-top: .5em;
-}
-.gaisan .suffix {
-    margin-bottom: 1em;
-}
-
 .repo {
     text-align: center;
 }
 .repo a {
     text-decoration: none;
 }
+
+.preview {
+    display: flex;
+}
+
+.demo-box {
+    background-color: #ececec;
+    box-shadow: 2px 2px 4px gray;
+    position: relative;
+    margin: auto;
+}
+.demo-box p {
+    margin: 0;
+    font-weight: bold;
+    font-size: .8em;
+}
+.demo-box > p {
+    position: absolute;
+    bottom: 0;
+    right: .25em;
+}
+.demo-box .demo-media {
+    background-color: #a0d3d6;
+}
+
+.count {
+    border: 1px solid forestgreen;
+    width: 30%;
+    display: flex;
+}
+.count > p {
+    margin:0;
+}
+.count > p .num {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: tomato;
+}
+
 
 [v-cloak] {
     display: none;
