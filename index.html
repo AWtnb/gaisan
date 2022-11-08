@@ -42,11 +42,11 @@
                 </div>
                 <div class="box">
                     <label>図表数</label>
-                    <input type="number" min="0" v-model="figureTableCount">
+                    <input type="number" min="0" v-model="mediaCount">
                 </div>
                 <div class="box" v-cloak>
-                    <label>図表サイズ感：紙面上で約<span class="lines">{{figureLines}}</span>行</label>
-                    <input type="range" min="3" v-bind:max="linesPerPage" step="1" v-model="figureLines"/>
+                    <label>図表サイズ感：紙面上で約<span class="lines">{{mediaSize}}</span>行</label>
+                    <input type="range" min="3" v-bind:max="linesPerPage" step="1" v-model="mediaSize"/>
                 </div>
             </div>
             <div class="gaisan" v-cloak>
@@ -96,8 +96,8 @@
                     ].join("\n"),
                     charsPerLine: 35,
                     linesPerPage: 30,
-                    figureTableCount: 5,
-                    figureLines: 10,
+                    mediaCount: 5,
+                    mediaSize: 10,
                 }
             },
             computed: {
@@ -120,7 +120,7 @@
                     return this.emptyReduced.reduce((accum, line) => accum + countGrid(line), 0);
                 },
                 totalLines: function () {
-                    return countLines(this.emptyReduced, this.charsPerLine) + this.figureTableCount * this.figureLines;
+                    return countLines(this.emptyReduced, this.charsPerLine) + this.mediaCount * this.mediaSize;
                 },
                 totalPages: function () {
                     return (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines / this.linesPerPage);
