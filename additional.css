@@ -18,6 +18,10 @@ body {
     max-width: 800px;
 }
 
+#app {
+    height: 90vh;
+}
+
 textarea {
     width: 100%;
     display: block;
@@ -36,10 +40,8 @@ label {
 input[type="number"] {
     box-shadow: 1px 1px 5px 1px #aaa;
 }
-input[type="range"] {
-    width: 100%;
-}
 input:not([type="file"]) {
+    width: 100%;
     min-width: 0;
 }
 
@@ -54,7 +56,8 @@ input:not([type="file"]) {
 
 .ui {
     width: 40%;
-    min-width: 200px;
+    min-width: 100px;
+    padding: 0 8px;
 }
 .ui .buttons {
     justify-content: space-between;
@@ -117,6 +120,8 @@ input:not([type="file"]) {
     display: flex;
     align-items: center;
     font-weight: 700;
+    min-width: 30%;
+    padding: 8px;
 }
 .count p {
     font-size: 1.8em;
