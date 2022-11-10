@@ -109,7 +109,7 @@
             },
             computed: {
                 contentLines: function () {
-                    return this.content.split(/\n/);
+                    return this.content.trim().split(/\n/);
                 },
                 emptyReduced: function () {
                     return this.contentLines.reduce((accum, line) => {
