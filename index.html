@@ -20,9 +20,7 @@
         <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="grid-counter" v-cloak>
             {{totalChars}}
-            文字（
-            {{totalGrids}}
-            マス相当）
+            文字（{{totalGrids}}マス・{{linesOnPaper}}行相当）
         </div>
         <div class="horizon">
             <div class="ui">
@@ -128,8 +126,11 @@
                 totalGrids: function () {
                     return this.emptyReduced.reduce((accum, line) => accum + countGrid(line), 0);
                 },
+                linesOnPaper: function () {
+                    return countLines(this.emptyReduced, this.charsPerLine);
+                },
                 totalLines: function () {
-                    return countLines(this.emptyReduced, this.charsPerLine) + this.mediaCount * (this.linesPerPage * this.mediaRatio / 100);
+                    return this.linesOnPaper + this.mediaCount * (this.linesPerPage * this.mediaRatio / 100);
                 },
                 totalPages: function () {
                     return (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines / this.linesPerPage);
