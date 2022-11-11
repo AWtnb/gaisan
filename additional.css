@@ -122,11 +122,12 @@ input:not([type="file"]) {
     font-weight: 700;
     min-width: 30%;
     padding: 8px;
+    line-height: 1;
 }
-.count p {
+.count .main {
     font-size: 1.8em;
 }
-.count p .multify {
+.count .main .multify {
     color: gray;
 }
 .count .num {
@@ -134,7 +135,12 @@ input:not([type="file"]) {
     font-weight: 900;
     color: tomato;
 }
-
+.count .detail {
+    font-weight: 400;
+    font-size: 1em;
+    margin-left: 1em;
+    color: gray;
+}
 
 [v-cloak] {
     display: none;

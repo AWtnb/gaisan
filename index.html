@@ -20,7 +20,7 @@
         <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="grid-counter" v-cloak>
             {{totalChars}}
-            文字（{{totalGrids}}マス・{{linesOnPaper}}行相当）
+            文字（{{totalGrids}}マス相当）
         </div>
         <div class="horizon">
             <div class="ui">
@@ -54,12 +54,19 @@
                 </div>
             </div>
             <div class="count" v-cloak>
-                <p>
-                    <span class="multify">&times;</span>
-                    約
-                    <span class="num">{{totalPages}}</span>
-                    ページ
-                </p>
+                <div>
+                    <div class="main">
+                        <span class="multify">&times;</span>
+                        約
+                        <span class="num">{{totalPages}}</span>
+                        ページ
+                    </div>
+                    <div class="detail">
+                        （文字部分
+                        {{linesOnPaper}}
+                        行）
+                    </div>
+                </div>
             </div>
         </div>
     </div>
