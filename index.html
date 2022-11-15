@@ -9,7 +9,8 @@
     <meta property="og:url" content="https://awtnb.github.io/gaisan/">
     <meta property="og:description" content="紙面上での分量シミュレーター">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20style%3D%22dominant-baseline%3Acentral%3Btext-anchor%3Amiddle%3Bfont-size%3A90px%3B%22%3E%26%23x1F9EA%3B%3C/text%3E%3C/svg%3E">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20style%3D%22dominant-baseline%3Acentral%3Btext-anchor%3Amiddle%3Bfont-size%3A90px%3B%22%3E%26%23x1F9EA%3B%3C/text%3E%3C/svg%3E">
     <title>GAI-SAN</title>
     <link rel="stylesheet" type="text/css" href="./almond.lite.css">
     <link rel="stylesheet" type="text/css" href="./additional.css">
@@ -36,13 +37,15 @@
                     <label>行取り</label>
                     <input type="number" min="1" v-model="linesPerPage">
                 </div>
-                <div class="box">
-                    <label>図表数</label>
-                    <input type="number" min="0" v-model="mediaCount">
-                </div>
-                <div class="box" v-cloak>
-                    <label>図表サイズ感：版面の<span class="lines">{{mediaRatio}}</span>%</label>
-                    <input type="range" min="0" max="100" step="5" v-model="mediaRatio"/>
+                <div class="box media-adjuster">
+                    <div class="counter">
+                        <label>図表数</label>
+                        <input type="number" min="0" v-model="mediaCount">
+                    </div>
+                    <div class="slider">
+                        <label>図表エリア：版面の<span class="lines">{{mediaRatio}}</span>%</label>
+                        <input type="range" min="0" max="100" step="5" v-model="mediaRatio" />
+                    </div>
                 </div>
             </div>
             <div class="preview" v-cloak>
@@ -78,7 +81,7 @@
             return [...Array(s.length).keys()].reduce((accum, i) => {
                 const c = s.charCodeAt(i);
                 // https://zukucode.com/2017/04/javascript-string-length.html
-                const nByte = ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4))? 1 : 2;
+                const nByte = ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) ? 1 : 2;
                 return accum + nByte;
             }, 0)
         }
@@ -140,23 +143,23 @@
                     return this.linesOnPaper + this.mediaCount * (this.linesPerPage * this.mediaRatio / 100);
                 },
                 totalPages: function () {
-                    return (this.linesPerPage < 1)? 0 : Math.ceil(this.totalLines / this.linesPerPage);
+                    return (this.linesPerPage < 1) ? 0 : Math.ceil(this.totalLines / this.linesPerPage);
                 },
-                isShiroku: function() {
+                isShiroku: function () {
                     return this.charsPerLine == 30 && this.linesPerPage == 27;
                 },
-                isA5: function() {
+                isA5: function () {
                     return this.charsPerLine == 35 && this.linesPerPage == 30;
                 },
-                mediaLines: function() {
+                mediaLines: function () {
                     return Math.ceil(this.linesPerPage * this.mediaRatio / 100);
                 },
-                demoMedia: function() {
+                demoMedia: function () {
                     return {
                         height: this.mediaRatio + "%"
                     };
                 },
-                demoBox: function() {
+                demoBox: function () {
                     return {
                         width: this.charsPerLine * 5,
                         height: this.linesPerPage * 5 * 1.6
@@ -164,11 +167,11 @@
                 },
             },
             methods: {
-                setShiroku: function() {
+                setShiroku: function () {
                     this.charsPerLine = 30;
                     this.linesPerPage = 27;
                 },
-                setA5: function() {
+                setA5: function () {
                     this.charsPerLine = 35;
                     this.linesPerPage = 30;
                 },

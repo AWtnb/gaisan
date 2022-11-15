@@ -38,9 +38,6 @@ label {
 }
 
 input[type="number"] {
-    box-shadow: 1px 1px 5px 1px #aaa;
-}
-input:not([type="file"]) {
     width: 100%;
     min-width: 0;
 }
@@ -56,7 +53,7 @@ input:not([type="file"]) {
 
 .ui {
     width: 40%;
-    min-width: 100px;
+    min-width: 250px;
     padding: 0 8px;
 }
 .ui .buttons {
@@ -75,7 +72,23 @@ input:not([type="file"]) {
 }
 .ui .box {
     padding-top: .75rem;
+    width: 100%;
 }
+.ui .media-adjuster {
+    display: flex;
+    justify-content: space-between;
+}
+.ui .media-adjuster .counter {
+    width: 30%;
+}
+.ui .media-adjuster .slider {
+    width: 60%;
+}
+.ui .media-adjuster .slider input[type="range"] {
+    min-width: 0;
+    width: 100%;
+}
+
 
 .lines {
     font-weight: 700;
