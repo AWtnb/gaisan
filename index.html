@@ -48,16 +48,16 @@
                     </div>
                 </div>
             </div>
-            <div class="preview" v-cloak>
-                <div class="demo-box" :style="{height: demoBox.height + 'px', width: demoBox.width + 'px'}">
-                    <div class="demo-media" v-if="mediaCount" :style="{height: demoMedia.height}">
-                        <p v-if="mediaLines">{{ mediaLines }} lines</p>
+            <div class="visualize">
+                <div class="preview" v-cloak>
+                    <div class="demo-box" :style="{height: demoBox.height + 'px', width: demoBox.width + 'px'}">
+                        <div class="demo-media" v-if="mediaCount" :style="{height: demoMedia.height}">
+                            <p v-if="mediaLines">{{ mediaLines }} lines</p>
+                        </div>
+                        <p>MAX: {{linesPerPage * charsPerLine}}</p>
                     </div>
-                    <p>MAX: {{linesPerPage * charsPerLine}}</p>
                 </div>
-            </div>
-            <div class="count" v-cloak>
-                <div>
+                <div class="count" v-cloak>
                     <div class="main">
                         <span class="multify">&times;</span>
                         約
@@ -161,8 +161,8 @@
                 },
                 demoBox: function () {
                     return {
-                        width: this.charsPerLine * 5,
-                        height: this.linesPerPage * 5 * 1.6
+                        width: this.charsPerLine * 6,
+                        height: this.linesPerPage * 6 * 1.6
                     };
                 },
             },
