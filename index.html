@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="sum">
-                    ＝文字部分で{{linesOnPaper}}行相当
+                    &#65309;上記の原稿は{{linesOnPaper}}行相当
                 </div>
                 <hr>
                 <div class="media-adjuster">
@@ -54,18 +54,18 @@
                         <input type="number" min="0" v-model="mediaCount">
                     </div>
                     <div class="box slider">
-                        <label>図表領域：<span class="lines">{{mediaRatio}}</span>%</label>
+                        <label>図表領域：<span class="lines" v-cloak>{{mediaRatio}}</span>%</label>
                         <input type="range" min="0" max="100" step="5" v-model="mediaRatio" />
                     </div>
                 </div>
             </div>
             <div class="visualize">
-                <div class="preview" v-cloak>
+                <div class="preview">
                     <div class="demo-box" :style="{height: demoBox.height + 'px', width: demoBox.width + 'px'}">
                         <div class="demo-media" v-if="mediaCount" :style="{height: demoMedia.height}">
-                            <p v-if="mediaLines">{{ mediaLines }} lines</p>
+                            <p v-if="mediaLines" v-cloak>{{ mediaLines }} lines</p>
                         </div>
-                        <p>MAX: {{linesPerPage * charsPerLine}}</p>
+                        <p v-cloak>MAX: {{linesPerPage * charsPerLine}}</p>
                     </div>
                 </div>
                 <div class="count" v-cloak>
