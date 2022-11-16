@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@400;700&family=Roboto+Mono:wght@700&display=swap');
 
 :root {
     --border: #004d61;
@@ -26,6 +26,7 @@ body {
 
 textarea {
     width: 100%;
+    min-width: 550px;
     display: block;
     font-size: .9rem;
     min-height: 200px;
@@ -56,16 +57,32 @@ input[type="number"] {
 }
 
 .ui {
-    width: 40%;
-    min-width: 250px;
+    width: 30%;
+    min-width: 300px;
     padding: 0 8px;
 }
-.ui .buttons {
-    justify-content: space-between;
+.ui .box {
+    width: 30%;
+}
+.ui .box label {
+    line-height: 1;
+    margin-bottom: .25rem;
+}
+.ui .media-adjuster, .ui .page-adjuster {
     display: flex;
+    justify-content: space-between;
+}
+.ui .buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column;
 }
 .ui .buttons button {
-    width: 45%;
+    width: 100%;
+    min-height: 0;
+    height: 46%;
+    padding: 2px;
+    border-radius: 20px;
 }
 .ui .buttons button.selected {
     text-decoration: underline;
@@ -74,21 +91,21 @@ input[type="number"] {
     text-underline-offset: -0.2em;
     text-decoration-skip-ink: none;
 }
-.ui .box {
-    padding-top: .75rem;
-    width: 100%;
+.ui .sum {
+    text-align: right;
+    padding-top: 4px;
+    color: gray;
+    font-size: .9rem;
 }
-.ui .media-adjuster {
-    display: flex;
-    justify-content: space-between;
-}
-.ui .media-adjuster .counter {
-    width: 30%;
+.ui hr {
+    max-width: 100%;
+    width: 98%;
+    margin: 1rem 0;
 }
 .ui .media-adjuster .slider {
-    width: 60%;
+    width: 65%;
 }
-.ui .media-adjuster .slider input[type="range"] {
+.ui input[type="range"] {
     min-width: 0;
     width: 100%;
 }
@@ -146,16 +163,14 @@ input[type="number"] {
     line-height: 1;
     font-size: 1.5rem;
 }
-.count .main {
-    position: relative;
-}
-.count .main .multify {
+.count .multify {
     color: gray;
 }
-.count .main .num {
-    display: inline-flex;
+.count .num {
     font-size: 2.5em;
     font-weight: 900;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
     color: tomato;
 }
 .count .detail {

@@ -30,25 +30,31 @@
         </div>
         <div class="horizon">
             <div class="ui">
-                <div class="buttons">
-                    <button @click="setA5" :class="{selected: isA5}">A5判キホン</button>
-                    <button @click="setShiroku" :class="{selected: isShiroku}">四六判キホン</button>
+                <div class="page-adjuster">
+                    <div class="box buttons">
+                        <button @click="setA5" :class="{selected: isA5}">A5キホン</button>
+                        <button @click="setShiroku" :class="{selected: isShiroku}">四六キホン</button>
+                    </div>
+                    <div class="box">
+                        <label>行取り</label>
+                        <input type="number" min="1" v-model="linesPerPage">
+                    </div>
+                    <div class="box">
+                        <label>字詰め</label>
+                        <input type="number" min="1" v-model="charsPerLine">
+                    </div>
                 </div>
-                <div class="box">
-                    <label>字詰め</label>
-                    <input type="number" min="1" v-model="charsPerLine">
+                <div class="sum">
+                    ＝文字部分で{{linesOnPaper}}行相当
                 </div>
-                <div class="box">
-                    <label>行取り</label>
-                    <input type="number" min="1" v-model="linesPerPage">
-                </div>
-                <div class="box media-adjuster">
-                    <div class="counter">
+                <hr>
+                <div class="media-adjuster">
+                    <div class="box">
                         <label>図表数</label>
                         <input type="number" min="0" v-model="mediaCount">
                     </div>
-                    <div class="slider">
-                        <label>図表エリア：版面の<span class="lines">{{mediaRatio}}</span>%</label>
+                    <div class="box slider">
+                        <label>図表領域：<span class="lines">{{mediaRatio}}</span>%</label>
                         <input type="range" min="0" max="100" step="5" v-model="mediaRatio" />
                     </div>
                 </div>
@@ -63,17 +69,8 @@
                     </div>
                 </div>
                 <div class="count" v-cloak>
-                    <div class="main">
-                        <span class="multify">&times;</span>
-                        約
-                        <span class="num">{{totalPages}}</span>
-                        ページ
-                    </div>
-                    <div class="detail">
-                        （文字部分
-                        {{linesOnPaper}}
-                        行）
-                    </div>
+                    <span class="multify">&times;</span>
+                    約<span class="num">{{totalPages}}</span>ページ
                 </div>
             </div>
         </div>
