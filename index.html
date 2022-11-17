@@ -36,12 +36,12 @@
                         <button @click="setShiroku" :class="{selected: isShiroku}">四六キホン</button>
                     </div>
                     <div class="box">
-                        <label>行取り</label>
-                        <input type="number" min="1" v-model="linesPerPage">
-                    </div>
-                    <div class="box">
                         <label>字詰め</label>
                         <input type="number" min="1" v-model="charsPerLine">
+                    </div>
+                    <div class="box">
+                        <label>行取り</label>
+                        <input type="number" min="1" v-model="linesPerPage">
                     </div>
                 </div>
                 <div class="sum">
