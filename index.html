@@ -34,7 +34,7 @@
         <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="grid-counter" v-cloak>
             {{totalChars}}
-            文字（{{totalGrids}}マス相当）
+            文字（字下げ込みで{{totalGrids}}マス相当）
         </div>
         <div class="horizon">
             <div class="ui">
@@ -87,16 +87,20 @@
     <script>
 
         const countBytes = (s) => {
-            return [...Array(s.length).keys()].reduce((accum, i) => {
+            let sum = 0;
+            for (let i = 0; i < s.length; i++) {
                 const c = s.charCodeAt(i);
-                // https://zukucode.com/2017/04/javascript-string-length.html
-                const nByte = ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) ? 1 : 2;
-                return accum + nByte;
-            }, 0)
+                if (c < 0x20) {
+                    continue;
+                }
+                const nByte = ((0x20 <= c && c < 0x7e) || (0xff61 <= c && c < 0xffa0)) ? 1 : 2;
+                sum += nByte;
+            }
+            return sum;
         }
 
         const countGrid = (s) => {
-            return Math.ceil(countBytes(s.trim()) / 2) + 1;
+            return Math.ceil(countBytes(s.trim()) / 2);
         }
 
         const countLines = (lines, charsPerLine) => {
@@ -107,7 +111,7 @@
                 if (line.trim().length < 1) {
                     return accum + 1;
                 }
-                return accum + Math.ceil(countGrid(line) / charsPerLine);
+                return accum + Math.ceil((countGrid(line) + 1) / charsPerLine);
             }, 0);
         }
 
@@ -143,7 +147,13 @@
                     return this.emptyReduced.reduce((accum, line) => accum + line.length, 0);
                 },
                 totalGrids: function () {
-                    return this.emptyReduced.reduce((accum, line) => accum + countGrid(line), 0);
+                    return this.emptyReduced.reduce((accum, line) => {
+                        const nGrid = countGrid(line);
+                        if (nGrid < 1) {
+                            return accum;
+                        }
+                        return accum + nGrid + 1;
+                    }, 0);
                 },
                 linesOnPaper: function () {
                     return countLines(this.emptyReduced, this.charsPerLine);
