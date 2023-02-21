@@ -93,7 +93,10 @@
                 if (c < 0x20) {
                     continue;
                 }
-                const nByte = ((0x20 <= c && c < 0x7e) || (0xff61 <= c && c < 0xffa0)) ? 1 : 2;
+                // \u3001-\u30ff：日本語約物・ひらがな・カタカナ
+                // \u4e00-\u9fff：CJK統合漢字（ここに含まれない漢字は見逃してしまう可能性あり）
+                // \uff01-\uff5e：全角約物・全角英数
+                const nByte = ((0x3001 <= c && c <= 0x30ff) || (0x4e00 <= c && c <= 0x9fff) || (0xff01 <= c && c <= 0xff5e)) ? 2 : 1;
                 sum += nByte;
             }
             return sum;
