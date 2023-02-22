@@ -80,16 +80,13 @@ input[type="number"] {
 .ui .buttons button {
     width: 100%;
     min-height: 0;
-    height: 46%;
+    height: 45%;
     padding: 2px;
     border-radius: 20px;
 }
 .ui .buttons button.selected {
-    text-decoration: underline;
-    text-decoration-thickness: 0.4em;
-    text-decoration-color: rgba(255, 99, 71, 0.8);
-    text-underline-offset: -0.2em;
-    text-decoration-skip-ink: none;
+    outline: 3px solid tomato;
+    outline-offset: 0;
 }
 .ui .sum {
     text-align: right;
