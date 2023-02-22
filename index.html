@@ -127,8 +127,26 @@
             return sum;
         }
 
+        const toHalfWidth = (s) => {
+            return s.replace(/[\uff21-\uff3a\uff41-\uff5a\uff10-\uff19]/g, (s) => {
+                return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+            });
+        }
+
+        const countSingleHalfWidthChar = (s) => {
+            const reg = new RegExp("(?<![a-zA-Z0-9])[a-zA-Z0-9](?![a-zA-Z0-9])", "g");
+            let count = 0;
+            let match;
+            while ((match = reg.exec(s)) !== null) {
+                count += 1;
+            }
+            return count;
+        }
+
         const countGrid = (s) => {
-            return Math.ceil(countBytes(s.trim()) / 2);
+            const target = toHalfWidth(s.trim());
+            const nByte = countBytes(target) + countSingleHalfWidthChar(target);
+            return Math.ceil(nByte / 2);
         }
 
         const countLines = (lines, charsPerLine) => {
