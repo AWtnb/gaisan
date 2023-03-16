@@ -26,7 +26,7 @@
         <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="grid-counter" v-cloak>
             {{totalChars}}
-            文字（字下げ込みで{{totalGrids}}マス相当）
+            文字（空白文字・制御文字ヌキ。字下げ込みで{{totalGrids}}マス相当）
         </div>
         <div class="horizon">
             <div class="ui">
@@ -172,8 +172,13 @@
                 contentLines: function () {
                     return this.content.trim().split(/\n/);
                 },
+                cleanLines: function () {
+                    return this.contentLines.map((line) => {
+                        return line.replace(/ +/g, " ").replace(/　+/g, "　").replace(/\t/g, "").replace(/[\uF06C\uF06E\uF09F]/g, "");
+                    });
+                },
                 emptyReduced: function () {
-                    return this.contentLines.reduce((accum, line) => {
+                    return this.cleanLines.reduce((accum, line) => {
                         accum.push(line);
                         if (accum.length > 1 && accum.at(-1).trim().length < 1 && accum.at(-2).trim().length < 1) {
                             accum.pop();

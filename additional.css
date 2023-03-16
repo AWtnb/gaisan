@@ -47,6 +47,8 @@ input[type="number"] {
 
 .grid-counter {
     text-align: right;
+    color: #666;
+    font-size: .9rem;
 }
 
 .horizon {
