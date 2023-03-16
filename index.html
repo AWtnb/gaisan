@@ -25,8 +25,9 @@
     <div id="app">
         <textarea placeholder="paste here!" v-model="content" v-select></textarea>
         <div class="grid-counter" v-cloak>
-            {{totalChars}}
-            文字（空白文字・制御文字ヌキ。字下げ込みで{{totalGrids}}マス相当）
+            空白文字・制御文字を除いて
+            <strong>{{totalChars}}</strong>
+            文字（字下げ込みで<strong>{{totalGrids}}</strong>マス相当）
         </div>
         <div class="horizon">
             <div class="ui">
