@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="sum">
-                    &#65309;上記の原稿は{{linesOnPaper}}行相当<br />{{linesOnPaper}}÷{{linesPerPage}}≒{{(linesOnPaper / linesPerPage).toFixed(1)}}(文字だけで{{ Math.floor(linesOnPaper / linesPerPage) }}ページと{{(linesOnPaper % linesPerPage)}}行相当)
+                    &#65309;文字だけで{{linesOnPaper}}行相当<br />&#65309;{{ Math.floor(linesOnPaper / linesPerPage) }}ページ（余白{{linesPerPage - (linesOnPaper % linesPerPage)}}行）
                 </div>
                 <hr>
                 <div class="media-adjuster">
